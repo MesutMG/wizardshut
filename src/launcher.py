@@ -17,9 +17,6 @@ clock = pg.time.Clock()
               
 running: bool = True
 
-def draw(window: pg.surface):
-    window.fill(BG_COLOR)
-
 def check_events(l: list[Event]):
     for event in l:
         if event.type == pg.QUIT:
@@ -47,7 +44,6 @@ while running:
     
     check_events(pg.event.get())
 
-    draw(window)
 
     pg.display.update()
     clock.tick(60)
