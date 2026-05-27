@@ -2,10 +2,10 @@ import pygame as pg
 import os.path
 import sys
 from pygame.event import Event
+from main_menu import MainMenu
 
 WIDTH = 640
 HEIGHT = 480
-BG_COLOR = (20,50,50)
 
 pg.init()
 pg.display.init()
@@ -40,10 +40,15 @@ def check_events(l: list[Event]):
                 character.char_shoot(window)
                 print(bullets)'''
 
-while running:                                                                                                    
-    
+mainmenu = MainMenu()
+
+while running:
+    mousePos = pg.mouse.get_pos()
+    mouseStatus = pg.mouse.get_pressed()
+
     check_events(pg.event.get())
 
+    mainmenu.draw(window, mousePos, mouseStatus)
 
     pg.display.update()
     clock.tick(60)

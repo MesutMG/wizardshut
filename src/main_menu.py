@@ -1,14 +1,13 @@
 import pygame as pg
-from pygame.event import Event
+from util.button import Button
+from scene import Scene
 
-WIDTH = 640
-HEIGHT = 480
-BG_COLOR = (20,50,50)
-
-class MainMenu:
+class MainMenu(Scene):
     def __init__(self):
-        pg.display.set_caption('wizardshut - menu')
+        super().__init__("menu")
         self.buttons = []
+        self.button1 = Button(20, 20, 100, 50, "helo", onePress=True)
 
-    def draw(window: pg.surface):
-        window.fill(BG_COLOR)
+    def draw(self, window, mousePos, mouseStatus):
+        l = self.button1.process(mousePos, mouseStatus)
+        window.blit(l[0], l[1])
