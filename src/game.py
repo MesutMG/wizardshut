@@ -57,11 +57,11 @@ class Game:
     
     def createScene(self, sceneIndex):
         match sceneIndex:
-            case 1:
-                self.scenes[1] = MainMenuScene(WIDTH, HEIGHT, self)
+            case "MainMenu":
+                self.scenes["MainMenu"] = MainMenuScene(WIDTH, HEIGHT, self)
             
-            case 2:
-                self.scenes[2] = OptionsScene(WIDTH, HEIGHT, self)
+            case "Options":
+                self.scenes["Options"] = OptionsScene(WIDTH, HEIGHT, self)
             
 
 pg.init()

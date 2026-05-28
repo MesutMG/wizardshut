@@ -6,9 +6,10 @@ class MainMenuScene(Scene):
     def __init__(self, width: int, height: int, game):
         super().__init__("wizardshut - menu", width, height, game)
         self.buttons = []
-        self.button1 = Button(20, 20, 100, 50, "options", lambda: game.changeSceneTo(2))
+        self.button1 = Button(20, 20, 100, 50, "options", lambda: game.changeSceneTo("Options"))
 
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="orange")
-        l = self.button1.process(mousePos, mouseStatus)
-        self.window.blit(l[0], l[1])
+        
+        mPos, mStat = self.button1.process(mousePos, mouseStatus)
+        self.window.blit(mPos, mStat)

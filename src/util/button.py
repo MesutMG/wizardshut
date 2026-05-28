@@ -45,4 +45,4 @@ class Button:
             self.buttonRect.width/2 - self.buttonSurf.get_rect().width/2,
             self.buttonRect.height/2 - self.buttonSurf.get_rect().height/2
         ])
-        return [self.buttonSurface, self.buttonRect]
+        return (self.buttonSurface, self.buttonRect)
