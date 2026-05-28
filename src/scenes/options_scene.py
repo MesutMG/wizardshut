@@ -6,7 +6,7 @@ class OptionsScene(Scene):
     def __init__(self, width: int, height: int, game):
         super().__init__("wizardshut - options", width, height, game)
         self.buttons = []
-        self.button1 = Button(50, 50, 200, 70, "back to menu", game.changeSceneTo(1), onePress=True)
+        self.button1 = Button(50, 50, 200, 70, "back to menu", lambda: game.changeSceneTo(1))
 
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="black")

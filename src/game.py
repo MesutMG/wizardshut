@@ -13,7 +13,7 @@ class Game:
         self.gameScene = MainMenuScene(WIDTH, HEIGHT, self)
         self.sceneName = 0 #none
         self.scenes = {}
-        self.clock = pg.time.Clock
+        self.clock = pg.time.Clock()
         self.running: bool = True
         self.mousePos = pg.mouse.get_pos()
         self.mouseStatus = pg.mouse.get_pressed()
@@ -27,13 +27,13 @@ class Game:
             if event.type == pg.KEYDOWN:    
                 if event.key == pg.K_q:
                     self.running = 0
-                
+                '''
                 if event.key == pg.K_UP:
-                    self.changeSceneTo(1) #.move_char(0,-10)
+                    move_char(0,-10)
                 
                 if event.key == pg.K_DOWN:
-                    self.changeSceneTo(2)#character.move_char(0,10)
-                '''
+                    move_char(0,10)
+                
                 if event.key == pg.K_RIGHT:
                     character.move_char(10,0)
                 if event.key == pg.K_LEFT:
@@ -58,10 +58,10 @@ class Game:
     def createScene(self, sceneIndex):
         match sceneIndex:
             case 1:
-                self.scenes[1] = MainMenuScene(WIDTH, HEIGHT)
+                self.scenes[1] = MainMenuScene(WIDTH, HEIGHT, self)
             
             case 2:
-                self.scenes[2] = OptionsScene(WIDTH, HEIGHT)
+                self.scenes[2] = OptionsScene(WIDTH, HEIGHT, self)
             
 
 pg.init()
@@ -76,5 +76,5 @@ while game.running:
 
     pg.display.update()
     game.clock.tick(60)
-    
+
 print("game end")
