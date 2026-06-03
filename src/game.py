@@ -18,30 +18,6 @@ class Game:
         self.mousePos = pg.mouse.get_pos()
         self.mouseStatus = pg.mouse.get_pressed()
 
-    def checkEvents(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                pg.quit()
-                sys.exit()
-        
-            if event.type == pg.KEYDOWN:    
-                if event.key == pg.K_q:
-                    self.running = 0
-                '''
-                if event.key == pg.K_UP:
-                    move_char(0,-10)
-                
-                if event.key == pg.K_DOWN:
-                    move_char(0,10)
-                
-                if event.key == pg.K_RIGHT:
-                    character.move_char(10,0)
-                if event.key == pg.K_LEFT:
-                    character.move_char(-10,0)
-                if event.key == pg.K_SPACE:
-                    character.char_shoot(window)
-                    print(bullets)'''
-
     def updateMouse(self):
         self.mousePos = pg.mouse.get_pos()
         self.mouseStatus = pg.mouse.get_pressed()
@@ -75,6 +51,6 @@ pg.display.init()
 game = Game()
 
 while game.running:
-    game.gameScene.update(game)
+    game.gameScene.update()
 
 print("game end")
