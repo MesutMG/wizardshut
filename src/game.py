@@ -17,7 +17,7 @@ class Game:
         self.mousePos = pg.mouse.get_pos()
         self.mouseStatus = pg.mouse.get_pressed()
 
-    def check_events(self):
+    def checkEvents(self):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
@@ -71,12 +71,6 @@ pg.display.init()
 game = Game()
 
 while game.running:
-    game.updateMouse()
-    game.check_events()
-
-    game.gameScene.draw(game.mousePos, game.mouseStatus)
-
-    pg.display.update()
-    game.clock.tick(60)
+    game.gameScene.update(game)
 
 print("game end")
