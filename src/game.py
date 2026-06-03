@@ -11,7 +11,6 @@ HEIGHT = 480
 class Game:
     def __init__(self):
         self.gameScene = MainMenuScene(WIDTH, HEIGHT, self)
-        self.sceneName = 0 #none
         self.scenes = {}
         self.clock = pg.time.Clock()
         self.running: bool = True
@@ -62,6 +61,9 @@ class Game:
             
             case "Options":
                 self.scenes["Options"] = OptionsScene(WIDTH, HEIGHT, self)
+
+    def exit_game(self):
+        self.running = False
             
 
 pg.init()
