@@ -19,8 +19,6 @@ class Scene:
         self.game.updateMouse()
         self.checkEvents()
         self.draw(self.game.mousePos, self.game.mouseStatus)
-        pg.display.update()
-        self.game.clock.tick(60)
 
     def draw(self, mousePos: tuple[int ,int], mouseStatus: tuple[bool, bool, bool]):
         self.window.fill(color="blue")

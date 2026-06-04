@@ -44,23 +44,15 @@ class GameTest(Scene):
                 if event.key == pg.K_DOWN:
                     self.DownArrow = False
             
-            if self.RightArrow and self.LeftArrow: self.mesutspeed[0] = 0
-            elif self.RightArrow: self.mesutspeed[0] = 10
-            elif self.LeftArrow: self.mesutspeed[0] = -10
-            else: self.mesutspeed[0] = 0
-            
-            if self.UpArrow and self.DownArrow: self.mesutspeed[1] = 0
-            elif self.UpArrow: self.mesutspeed[1] = -10
-            elif self.DownArrow: self.mesutspeed[1] = 10
-            else: self.mesutspeed[1] = 0
-
-
-    def update(self):
-        self.game.updateMouse()
-        self.checkEvents()
-        self.draw(self.game.mousePos, self.game.mouseStatus)
-        pg.display.update()
-        self.game.clock.tick(60)
+        if self.RightArrow and self.LeftArrow: self.mesutspeed[0] = 0
+        elif self.RightArrow: self.mesutspeed[0] = 5
+        elif self.LeftArrow: self.mesutspeed[0] = -5
+        else: self.mesutspeed[0] = 0
+        
+        if self.UpArrow and self.DownArrow: self.mesutspeed[1] = 0
+        elif self.UpArrow: self.mesutspeed[1] = -5
+        elif self.DownArrow: self.mesutspeed[1] = 5
+        else: self.mesutspeed[1] = 0
 
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="black")

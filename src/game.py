@@ -52,5 +52,7 @@ game = Game()
 
 while game.running:
     game.gameScene.update()
+    pg.display.update()
+    game.clock.tick(60)
 
 print("game end")
