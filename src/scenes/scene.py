@@ -4,6 +4,8 @@ class Scene:
     def __init__(self, caption: str, width: int, height: int, game):
         pg.display.set_caption(caption)
         self.window = pg.display.set_mode((width, height), vsync=1)
+        self.width = width
+        self.height = height
         self.game = game
 
     def checkEvents(self):
