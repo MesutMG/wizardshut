@@ -5,9 +5,8 @@ from scenes.scene import Scene
 class OptionsScene(Scene):
     def __init__(self, width: int, height: int, game):
         super().__init__("wizardshut - options", width, height, game)
-        self.button1 = Button(50, 50, 200, 70, "back to menu", lambda: game.changeSceneTo("MainMenu"))
+        self.button1 = Button(x=width/2 - 100, y=50, width=200, height=100, buttonText="back to menu", fontsize=25, onclickFunction=lambda: game.changeSceneTo("MainMenu"))
         self.oscarimg = pg.image.load('src/resources/img/oscar.png')
-        self.mesutimg = pg.transform.scale(pg.image.load('src/resources/img/mesut.png'), (100, 140))
 
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="black")
@@ -15,5 +14,4 @@ class OptionsScene(Scene):
         mPos, mStat = self.button1.process(mousePos, mouseStatus)
         self.window.blit(mPos, mStat)
 
-        self.window.blit(self.oscarimg,(50, 50))
-        self.window.blit(self.mesutimg,(200, 200))
+        self.window.blit(self.oscarimg,(10, 10))

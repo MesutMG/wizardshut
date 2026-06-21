@@ -8,8 +8,8 @@ class GameTest(Scene):
         super().__init__("wizardshut - options", width, height, game)
         self.pauseMenu: PauseMenu
         self.paused: bool = False
-        self.button1 = Button(50, 50, 200, 70, "back to menu", lambda: game.changeSceneTo("MainMenu"))
-        self.mesutimg = pg.transform.scale(pg.image.load('src/resources/img/mesut.png'), (100, 140))
+        self.button1 = Button(x=50, y=50, width=200, height=70, fontsize=20, buttonText="back to menu", onclickFunction=lambda: game.changeSceneTo("MainMenu"))
+        self.mesutimg = pg.transform.scale(pg.image.load('src/resources/img/mesut.png'), (103,135))
         self.mesutpos:list[int,int] = [100,100]
         self.mesutspeed:list[int,int] = [0,0]
 
@@ -63,10 +63,9 @@ class GameTest(Scene):
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="green")
 
-        
 
         self.mesutpos[0] = min(max(self.mesutpos[0] + self.mesutspeed[0], 0), 540)
-        self.mesutpos[1] = min(max(self.mesutpos[1] + self.mesutspeed[1], 0), 380)
+        self.mesutpos[1] = min(max(self.mesutpos[1] + self.mesutspeed[1], 0), 340)
         self.window.blit(self.mesutimg,(self.mesutpos[0], self.mesutpos[1]))
         
         mPos, mStat = self.button1.process(mousePos, mouseStatus)
@@ -87,4 +86,8 @@ class GameTest(Scene):
 
     def pauseGame(self):
         self.paused = True
+        self.RightArrow = False
+        self.LeftArrow = False
+        self.UpArrow = False
+        self.DownArrow = False
         self.pauseMenu = PauseMenu(self.width, self.height, self.game, self)

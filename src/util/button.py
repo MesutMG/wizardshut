@@ -1,11 +1,12 @@
 import pygame as pg
 
 class Button:
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None):
+    def __init__(self, x, y, width, height, buttonText='Button', fontsize = 40, onclickFunction=None):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
+        self.fontsize = fontsize
         self.onclickFunction = onclickFunction
         self.clickableNow: bool = True
         self.alreadyPressed: bool = False
@@ -20,7 +21,7 @@ class Button:
 
         self.buttonSurface = pg.Surface((self.width, self.height))
         self.buttonRect = pg.Rect(self.x, self.y, self.width, self.height)
-        self.buttonSurf = pg.font.SysFont('Arial', 40).render(buttonText, True, (20, 20, 20))
+        self.buttonSurf = pg.font.SysFont('Arial', self.fontsize).render(buttonText, True, (20, 20, 20))
     
     def process(self, mousePos, mouseState): 
         newState = 'normal'
