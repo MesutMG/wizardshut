@@ -1,14 +1,13 @@
 import pygame as pg
-from util.button import Button
+from util.button import imgButton
 from scenes.scene import Scene
 
 class PauseMenu(Scene):
     def __init__(self, width: int, height: int, game, sceneBelow):
         super().__init__("wizardshut - menu", width, height, game)
         self.sceneBelow = sceneBelow
-        self.button1 = Button(100, 20, 100, 50, "Main Menu", lambda: game.changeSceneTo("MainMenu"))
-        self.button2 = Button(100, 200, 100, 50, "Exit", lambda: game.exit_game())
-        self.button3 = Button(100, 380, 100, 50, "Game Test", lambda: game.changeSceneTo("GameTest"))
+        self.button2 = imgButton(220, 200, 200, 100, "src/resources/buttons/button_exit.png", lambda: game.exit_game())
+        self.button3 = imgButton(220, 350, 200, 100, "src/resources/buttons/button_play.png", lambda: self.sceneBelow.setPaused(False))
 
     def checkEvents(self):
         for event in pg.event.get():
@@ -17,7 +16,7 @@ class PauseMenu(Scene):
         
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_q:
-                    self.game.running = 0
+                    self.game.running = False
 
                 if event.key == pg.K_ESCAPE:
                     self.sceneBelow.setPaused(False)
@@ -29,11 +28,7 @@ class PauseMenu(Scene):
         self.draw(self.game.mousePos, self.game.mouseStatus)
 
     def draw(self, mousePos, mouseStatus):
-        pg.draw.rect(pg.Surface((640, 480), pg.SRCALPHA), (255, 255, 255, 128), (10, 10, 50, 50))
-        self.window.blit(pg.Surface((640, 480), pg.SRCALPHA), (0, 0))
-        
-        btnSrf, btnRct = self.button1.process(mousePos, mouseStatus)
-        self.window.blit(btnSrf, btnRct)
+        self.window.fill("#55555555")
 
         btnSrf, btnRct = self.button2.process(mousePos, mouseStatus)
         self.window.blit(btnSrf, btnRct)

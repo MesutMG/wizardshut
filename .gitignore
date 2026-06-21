@@ -2,3 +2,4 @@ venv/
 src/__pycache__/
 src/util/__pycache__/
 src/scenes/__pycache__/
+src/resources/.DS_Store

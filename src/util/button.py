@@ -50,3 +50,45 @@ class Button:
             self.needsRedraw = False
             
         return self.buttonSurface, self.buttonRect
+
+class imgButton:
+    def __init__(self, x, y, width, height, imgSrc, onclickFunction=None):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.onclickFunction = onclickFunction
+        self.clickableNow: bool = True
+        self.alreadyPressed: bool = False
+        
+        self.isDrewn = False 
+
+        self.buttonRect = pg.Rect(self.x, self.y, self.width, self.height)
+        self.buttonSurf = pg.transform.scale(pg.image.load(imgSrc), (self.width, self.height))
+        self.buttonSurfBACKGROUND = pg.transform.scale(pg.image.load(imgSrc), (self.width, self.height))
+    
+    def process(self, mousePos, mouseState):
+        
+        if self.buttonRect.collidepoint(mousePos) and (not mouseState[0]):
+            self.clickableNow = True
+        elif (not self.buttonRect.collidepoint(mousePos)) and mouseState[0]:
+            self.clickableNow = False
+
+        if self.buttonRect.collidepoint(mousePos) and self.clickableNow:
+            if mouseState[0]:
+                self.alreadyPressed = True
+            elif self.alreadyPressed:
+                self.onclickFunction()
+                self.alreadyPressed = False
+        else:
+            self.alreadyPressed = False
+        
+        if not self.isDrewn:
+            self.buttonSurfBACKGROUND.fill("#55555555")
+            self.buttonSurfBACKGROUND.blit(self.buttonSurf, [
+                self.width/2 - self.width/2,
+                self.height/2 - self.height/2
+            ])
+            self.isDrewn = True
+            
+        return self.buttonSurfBACKGROUND, self.buttonRect

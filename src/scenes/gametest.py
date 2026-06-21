@@ -26,7 +26,7 @@ class GameTest(Scene):
         
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_q:
-                    self.game.running = 0
+                    self.game.running = False
 
                 if event.key == pg.K_ESCAPE:
                     self.pauseGame()
@@ -61,7 +61,7 @@ class GameTest(Scene):
         else: self.mesutspeed[1] = 0
 
     def draw(self, mousePos, mouseStatus):
-        self.window.fill(color="black")
+        self.window.fill(color="green")
 
         
 
@@ -75,9 +75,9 @@ class GameTest(Scene):
     def update(self):
         if self.paused:
             self.pauseMenu.update()
-            print(2)
+            print("Paused")
         else:
-            print(1)
+            print("Running")
             self.game.updateMouse()
             self.checkEvents()
             self.draw(self.game.mousePos, self.game.mouseStatus)
