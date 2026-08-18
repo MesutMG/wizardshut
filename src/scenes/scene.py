@@ -18,7 +18,6 @@ class Scene:
                     self.game.running = 0
                 
     def update(self):
-        self.game.updateMouse()
         self.checkEvents()
         self.draw(self.game.mousePos, self.game.mouseStatus)
 

@@ -85,7 +85,6 @@ class imgButton:
             self.alreadyPressed = False
         
         if not self.isDrewn:
-            self.buttonSurfBACKGROUND.fill("#55555555")
             self.buttonSurfBACKGROUND.blit(self.buttonSurf, [
                 self.width/2 - self.width/2,
                 self.height/2 - self.height/2

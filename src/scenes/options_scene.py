@@ -8,6 +8,11 @@ class OptionsScene(Scene):
         self.button1 = Button(x=width/2 - 100, y=50, width=200, height=100, buttonText="back to menu", fontsize=25, onclickFunction=lambda: game.changeSceneTo("MainMenu"))
         self.oscarimg = pg.image.load('src/resources/img/oscar.png')
 
+    def update(self):
+        self.game.updateMouse()
+        self.checkEvents()
+        self.draw(self.game.mousePos, self.game.mouseStatus)
+
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="black")
 

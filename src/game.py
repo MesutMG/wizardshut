@@ -11,8 +11,8 @@ HEIGHT = 480
 
 class Game:
     def __init__(self):
-        self.gameScene = MainMenuScene(WIDTH, HEIGHT, self)
-        self.scenes = {}
+        self.currentScene = MainMenuScene(WIDTH, HEIGHT, self)
+        self.scenes = {"MainMenu": self.currentScene}
         self.clock = pg.time.Clock()
         self.running: bool = True
         self.mousePos = pg.mouse.get_pos()
@@ -25,11 +25,11 @@ class Game:
     def changeSceneTo(self, sceneIndex):
         if self.scenes.get(sceneIndex) == None:
             self.createScene(sceneIndex)
-            self.gameScene = self.scenes.get(sceneIndex)
-        elif (self.gameScene == self.scenes.get(sceneIndex)):
+            self.currentScene = self.scenes.get(sceneIndex)
+        elif (self.currentScene == self.scenes.get(sceneIndex)):
             pass
         else:
-            self.gameScene = self.scenes.get(sceneIndex)
+            self.currentScene = self.scenes.get(sceneIndex)
     
     def createScene(self, sceneIndex):
         match sceneIndex:
@@ -51,7 +51,7 @@ pg.display.init()
 game = Game()
 
 while game.running:
-    game.gameScene.update()
+    game.currentScene.update()
     pg.display.update()
     game.clock.tick(60)
 
