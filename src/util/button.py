@@ -10,6 +10,7 @@ class Button:
         self.onclickFunction = onclickFunction
         self.clickableNow: bool = True
         self.alreadyPressed: bool = False
+        self.animation: bool = False
 
         self.fillColors = {
             'normal': '#ffffff',
@@ -24,6 +25,8 @@ class Button:
         self.buttonSurf = pg.font.SysFont('Arial', self.fontsize).render(buttonText, True, (20, 20, 20))
     
     def process(self, mousePos, mouseState): 
+        self.buttonRect.x = self.x
+        self.buttonRect.y = self.y
         newState = 'normal'
         
         if self.buttonRect.collidepoint(mousePos) and (not mouseState[0]):
@@ -52,24 +55,15 @@ class Button:
             
         return self.buttonSurface, self.buttonRect
 
-class imgButton:
+class imgButton(Button):
     def __init__(self, x, y, width, height, imgSrc, onclickFunction=None):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.onclickFunction = onclickFunction
-        self.clickableNow: bool = True
-        self.alreadyPressed: bool = False
-        
-        self.isDrewn = False 
+        super().__init__(x, y, width, height, onclickFunction=onclickFunction)
+        self.buttonSurf = pg.transform.scale(pg.image.load(imgSrc).convert_alpha(), (self.width, self.height))
 
-        self.buttonRect = pg.Rect(self.x, self.y, self.width, self.height)
-        self.buttonSurf = pg.transform.scale(pg.image.load(imgSrc), (self.width, self.height))
-        self.buttonSurfBACKGROUND = pg.transform.scale(pg.image.load(imgSrc), (self.width, self.height))
-    
     def process(self, mousePos, mouseState):
-        
+        self.buttonRect.x = self.x
+        self.buttonRect.y = self.y
+
         if self.buttonRect.collidepoint(mousePos) and (not mouseState[0]):
             self.clickableNow = True
         elif (not self.buttonRect.collidepoint(mousePos)) and mouseState[0]:
@@ -79,16 +73,10 @@ class imgButton:
             if mouseState[0]:
                 self.alreadyPressed = True
             elif self.alreadyPressed:
-                self.onclickFunction()
+                if self.onclickFunction:
+                    self.onclickFunction()
                 self.alreadyPressed = False
         else:
             self.alreadyPressed = False
-        
-        if not self.isDrewn:
-            self.buttonSurfBACKGROUND.blit(self.buttonSurf, [
-                self.width/2 - self.width/2,
-                self.height/2 - self.height/2
-            ])
-            self.isDrewn = True
             
-        return self.buttonSurfBACKGROUND, self.buttonRect
+        return self.buttonSurf, self.buttonRect

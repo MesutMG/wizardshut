@@ -8,10 +8,9 @@ from scenes.pause_menu import PauseMenu
 
 class GameTest(Scene):
     def __init__(self, width: int, height: int, game):
-        super().__init__("wizardshut - options", width, height, game)
+        super().__init__("wizardshut - gametest", width, height, game)
         self.pauseMenu: PauseMenu
         self.paused: bool = False
-        self.button1 = Button(x=50, y=50, width=200, height=70, fontsize=20, buttonText="back to menu", onclickFunction=lambda: game.changeSceneTo("MainMenu"))
         
         self.mesut = imgPlayer(x=100, y=100, width=120, height=200, imgSrc='src/resources/img/mesut.png')
         self.npc1 = Npc(x=200, y=200, width=80, height=120, imgSrc='src/resources/img/npc.png')
@@ -73,12 +72,15 @@ class GameTest(Scene):
         self.window.blit(self.mesut.playerImg,(self.mesut.playerPos[0], self.mesut.playerPos[1]))
         
         mPos, mStat = self.button1.process(mousePos, mouseStatus)
+        self.window.set_at(self.mesut.playerPos[0], self.mesut.playerPos[1])
         self.window.blit(mPos, mStat)
 
     def update(self):
         if self.paused:
             self.pauseMenu.update()
+            print("Paused")
         else:
+            print("Running")
             self.game.updateMouse()
             self.checkEvents()
             self.draw(self.game.mousePos, self.game.mouseStatus)
