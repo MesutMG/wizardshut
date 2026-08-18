@@ -1,6 +1,9 @@
 import pygame as pg
 from util.button import Button
 from scenes.scene import Scene
+from characters.player import imgPlayer
+from characters.npc import Npc
+
 from scenes.pause_menu import PauseMenu
 
 class GameTest(Scene):
@@ -9,9 +12,9 @@ class GameTest(Scene):
         self.pauseMenu: PauseMenu
         self.paused: bool = False
         self.button1 = Button(x=50, y=50, width=200, height=70, fontsize=20, buttonText="back to menu", onclickFunction=lambda: game.changeSceneTo("MainMenu"))
-        self.mesutimg = pg.transform.scale(pg.image.load('src/resources/img/mesut.png'), (103,135))
-        self.mesutpos:list[int,int] = [100,100]
-        self.mesutspeed:list[int,int] = [0,0]
+        
+        self.mesut = imgPlayer(x=100, y=100, width=120, height=200, imgSrc='src/resources/img/mesut.png')
+        self.npc1 = Npc(x=200, y=200, width=80, height=120, imgSrc='src/resources/img/npc.png')
 
         self.RightArrow:bool = False
         self.LeftArrow:bool = False
@@ -50,23 +53,24 @@ class GameTest(Scene):
                 if event.key == pg.K_DOWN:
                     self.DownArrow = False
             
-        if self.RightArrow and self.LeftArrow: self.mesutspeed[0] = 0
-        elif self.RightArrow: self.mesutspeed[0] = 5
-        elif self.LeftArrow: self.mesutspeed[0] = -5
-        else: self.mesutspeed[0] = 0
+        if self.RightArrow and self.LeftArrow: self.mesut.playerSpeed[0] = 0
+        elif self.RightArrow: self.mesut.playerSpeed[0] = 5
+        elif self.LeftArrow: self.mesut.playerSpeed[0] = -5
+        else: self.mesut.playerSpeed[0] = 0
         
-        if self.UpArrow and self.DownArrow: self.mesutspeed[1] = 0
-        elif self.UpArrow: self.mesutspeed[1] = -5
-        elif self.DownArrow: self.mesutspeed[1] = 5
-        else: self.mesutspeed[1] = 0
+        if self.UpArrow and self.DownArrow: self.mesut.playerSpeed[1] = 0
+        elif self.UpArrow: self.mesut.playerSpeed[1] = -5
+        elif self.DownArrow: self.mesut.playerSpeed[1] = 5
+        else: self.mesut.playerSpeed[1] = 0
 
     def draw(self, mousePos, mouseStatus):
         self.window.fill(color="green")
 
+        self.window.blit(self.npc1.npcImg,(self.npc1.npcPos[0], self.npc1.npcPos[1]))
 
-        self.mesutpos[0] = min(max(self.mesutpos[0] + self.mesutspeed[0], 0), 540)
-        self.mesutpos[1] = min(max(self.mesutpos[1] + self.mesutspeed[1], 0), 340)
-        self.window.blit(self.mesutimg,(self.mesutpos[0], self.mesutpos[1]))
+        self.mesut.playerPos[0] = min(max(self.mesut.playerPos[0] + self.mesut.playerSpeed[0], 0), 540)
+        self.mesut.playerPos[1] = min(max(self.mesut.playerPos[1] + self.mesut.playerSpeed[1], 0), 340)
+        self.window.blit(self.mesut.playerImg,(self.mesut.playerPos[0], self.mesut.playerPos[1]))
         
         mPos, mStat = self.button1.process(mousePos, mouseStatus)
         self.window.blit(mPos, mStat)
@@ -91,3 +95,7 @@ class GameTest(Scene):
         self.UpArrow = False
         self.DownArrow = False
         self.pauseMenu = PauseMenu(self.width, self.height, self.game, self)
+'''
+    def checkInteraction(self):
+        if self.mesut.playerInteractionRect.colliderect(self.npc1.npcInteractionRect):
+            print("foiwjf093jf")'''
